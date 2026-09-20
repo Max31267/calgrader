@@ -5,7 +5,6 @@ import com.lucly.calgrader.calgrader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -16,8 +15,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 
 public class UpgraderMenu extends AbstractContainerMenu {
     public static final int BUTTON_UPGRADE = 0;
@@ -214,9 +211,8 @@ public class UpgraderMenu extends AbstractContainerMenu {
         }
 
         if (pendingSuccess && pendingReward != Items.AIR && pendingRewardAmount > 0) {
-            if (upgrader instanceof ItemUpgraderBlockEntity blockEntity) {
-                dropRewardOnUpgrader(blockEntity, pendingReward, pendingRewardAmount);
-            }
+            giveReward(player, pendingReward, pendingRewardAmount);
+            player.getInventory().setChanged();
         }
 
         pendingSuccess = false;
@@ -233,19 +229,15 @@ public class UpgraderMenu extends AbstractContainerMenu {
         super.removed(player);
     }
 
-    private static void dropRewardOnUpgrader(ItemUpgraderBlockEntity blockEntity, Item item, int amount) {
-        Level level = blockEntity.getLevel();
-        if (level == null || level.isClientSide()) {
-            return;
-        }
-
-        BlockPos pos = blockEntity.getBlockPos();
+    private static void giveReward(Player player, Item item, int amount) {
         int remaining = amount;
         int maxStackSize = item.getDefaultMaxStackSize();
         while (remaining > 0) {
             ItemStack reward = new ItemStack(item, Math.min(remaining, maxStackSize));
             remaining -= reward.getCount();
-            Containers.dropItemStack(level, pos.getX() + 0.5D, pos.getY() + 1.05D, pos.getZ() + 0.5D, reward);
+            if (!player.addItem(reward) && !reward.isEmpty()) {
+                player.drop(reward, false);
+            }
         }
     }
 
