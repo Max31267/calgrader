@@ -1,0 +1,23 @@
+{
+  "itemGroup.calgrader": "Апгрейдер предметов",
+  "block.calgrader.item_upgrader": "Апгрейдер предметов",
+  "container.calgrader.item_upgrader": "Апгрейд предметов",
+  "button.calgrader.upgrade": "Прокачать",
+  "label.calgrader.success": "Успех",
+  "label.calgrader.average_chance": "средний шанс",
+  "label.calgrader.win_chance": "шанс выигрыша",
+  "label.calgrader.offer": "Вклад",
+  "label.calgrader.reward": "Награда",
+  "label.calgrader.choose_reward": "Предметы из выживания",
+  "label.calgrader.search": "Поиск предметов...",
+  "label.calgrader.selected_value": "Ценность: %s",
+  "label.calgrader.item_count": "%s из %s предметов",
+  "label.calgrader.nothing_found": "Ничего не найдено",
+  "label.calgrader.value": "Ценность: %s",
+  "label.calgrader.quantity": "Количество: %s",
+  "label.calgrader.amount": "Кол-во: %s",
+  "label.calgrader.unit_value": "За штуку: %s",
+  "label.calgrader.total_value": "Цена: %s",
+  "label.calgrader.level": "Уровень: %s",
+  "calgrader.configuration.title": "Настройки апгрейдера"
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "calgrader:block/item_upgrader"
+    }
+  }
+}

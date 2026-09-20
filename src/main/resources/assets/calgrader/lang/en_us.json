@@ -1,0 +1,23 @@
+{
+  "itemGroup.calgrader": "Calgrader",
+  "block.calgrader.item_upgrader": "Item Upgrader",
+  "container.calgrader.item_upgrader": "Item Upgrader",
+  "button.calgrader.upgrade": "Upgrade",
+  "label.calgrader.success": "Success",
+  "label.calgrader.average_chance": "average chance",
+  "label.calgrader.win_chance": "win chance",
+  "label.calgrader.offer": "Offer",
+  "label.calgrader.reward": "Reward",
+  "label.calgrader.choose_reward": "Choose a survival item",
+  "label.calgrader.search": "Search items...",
+  "label.calgrader.selected_value": "Value: %s",
+  "label.calgrader.item_count": "%s / %s items",
+  "label.calgrader.nothing_found": "Nothing found",
+  "label.calgrader.value": "Value: %s",
+  "label.calgrader.quantity": "Value: %s",
+  "label.calgrader.amount": "Amount: %s",
+  "label.calgrader.unit_value": "Each: %s",
+  "label.calgrader.total_value": "Cost: %s",
+  "label.calgrader.level": "Level: %s",
+  "calgrader.configuration.title": "calgrader Configs"
+}
