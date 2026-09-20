@@ -1,135 +1,59 @@
 {
-  "credit": "Создано в Blockbench",
+  "parent": "block/block",
+  "credit": "Создано в Blockbench на основе кафедры Minecraft",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [0, 135, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.4, 0.4, 0.4]
+    }
+  },
   "textures": {
+    "particle": "calgrader:block/item_upgrader_side",
+    "bottom": "calgrader:block/item_upgrader_side",
+    "base": "calgrader:block/item_upgrader_side",
     "front": "calgrader:block/item_upgrader_front",
-    "side": "calgrader:block/item_upgrader_side",
-    "top": "calgrader:block/item_upgrader_top",
-    "particle": "calgrader:block/item_upgrader_side"
+    "sides": "calgrader:block/item_upgrader_side",
+    "top": "calgrader:block/item_upgrader_top"
   },
   "elements": [
     {
-      "name": "Основной корпус",
-      "from": [0.5, 0, 0.5],
-      "to": [15.5, 15, 15.5],
+      "name": "Основание кафедры",
+      "from": [0, 0, 0],
+      "to": [16, 2, 16],
       "faces": {
-        "north": {"texture": "#front", "uv": [0, 0, 32, 32]},
-        "south": {"texture": "#side", "uv": [0, 0, 32, 32]},
-        "east": {"texture": "#side", "uv": [0, 0, 32, 32]},
-        "west": {"texture": "#side", "uv": [0, 0, 32, 32]},
-        "up": {"texture": "#top", "uv": [0, 0, 32, 32]},
-        "down": {"texture": "#side", "uv": [0, 0, 32, 32]}
+        "north": {"uv": [0, 28, 32, 32], "texture": "#base", "cullface": "north"},
+        "east": {"uv": [0, 12, 32, 16], "texture": "#base", "cullface": "east"},
+        "south": {"uv": [0, 12, 32, 16], "texture": "#base", "cullface": "south"},
+        "west": {"uv": [0, 12, 32, 16], "texture": "#base", "cullface": "west"},
+        "up": {"uv": [0, 0, 32, 32], "rotation": 180, "texture": "#base"},
+        "down": {"uv": [0, 0, 32, 32], "texture": "#bottom", "cullface": "down"}
       }
     },
     {
-      "name": "Верхний кожух",
-      "from": [0, 15, 0],
-      "to": [16, 16, 16],
+      "name": "Центральная стойка",
+      "from": [4, 2, 4],
+      "to": [12, 15, 12],
       "faces": {
-        "north": {"texture": "#side", "uv": [0, 0, 32, 4]},
-        "south": {"texture": "#side", "uv": [0, 0, 32, 4]},
-        "east": {"texture": "#side", "uv": [0, 0, 4, 32]},
-        "west": {"texture": "#side", "uv": [0, 0, 4, 32]},
-        "up": {"texture": "#top", "uv": [0, 0, 32, 32]},
-        "down": {"texture": "#side", "uv": [0, 0, 32, 32]}
+        "north": {"uv": [0, 0, 16, 26], "texture": "#front"},
+        "east": {"uv": [4, 28, 30, 16], "rotation": 90, "texture": "#sides"},
+        "south": {"uv": [16, 6, 32, 32], "texture": "#front"},
+        "west": {"uv": [4, 16, 30, 32], "rotation": 90, "texture": "#sides"}
       }
     },
     {
-      "name": "Передняя панель",
-      "from": [1.5, 2, -0.25],
-      "to": [14.5, 14, 0.25],
+      "name": "Наклонная панель",
+      "from": [0.0125, 12, 3],
+      "to": [15.9875, 16, 16],
+      "rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 8]},
       "faces": {
-        "north": {"texture": "#front", "uv": [0, 0, 32, 32]},
-        "south": {"texture": "#side", "uv": [0, 0, 32, 4]},
-        "east": {"texture": "#side", "uv": [0, 0, 4, 24]},
-        "west": {"texture": "#side", "uv": [0, 0, 4, 24]},
-        "up": {"texture": "#side", "uv": [0, 0, 32, 4]},
-        "down": {"texture": "#side", "uv": [0, 0, 32, 4]}
-      }
-    },
-    {
-      "name": "Центральный экран",
-      "from": [4, 4, -0.5],
-      "to": [12, 12, -0.25],
-      "faces": {
-        "north": {"texture": "#front", "uv": [4, 4, 28, 28]},
-        "south": {"texture": "#side", "uv": [0, 0, 32, 2]},
-        "east": {"texture": "#side", "uv": [0, 0, 2, 16]},
-        "west": {"texture": "#side", "uv": [0, 0, 2, 16]},
-        "up": {"texture": "#side", "uv": [0, 0, 16, 2]},
-        "down": {"texture": "#side", "uv": [0, 0, 16, 2]}
-      }
-    },
-    {
-      "name": "Левая передняя стойка",
-      "from": [1, 1, -0.4],
-      "to": [3, 15, 0.2],
-      "faces": {
-        "north": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "south": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "east": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "west": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "up": {"texture": "#side", "uv": [0, 0, 8, 8]},
-        "down": {"texture": "#side", "uv": [0, 0, 8, 8]}
-      }
-    },
-    {
-      "name": "Правая передняя стойка",
-      "from": [13, 1, -0.4],
-      "to": [15, 15, 0.2],
-      "faces": {
-        "north": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "south": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "east": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "west": {"texture": "#side", "uv": [0, 0, 8, 32]},
-        "up": {"texture": "#side", "uv": [0, 0, 8, 8]},
-        "down": {"texture": "#side", "uv": [0, 0, 8, 8]}
-      }
-    },
-    {
-      "name": "Нижняя опора слева",
-      "from": [1, 0, 1],
-      "to": [6, 1, 6],
-      "faces": {
-        "north": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "south": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "east": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "west": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "up": {"texture": "#side", "uv": [0, 0, 20, 20]},
-        "down": {"texture": "#side", "uv": [0, 0, 20, 20]}
-      }
-    },
-    {
-      "name": "Нижняя опора справа",
-      "from": [10, 0, 10],
-      "to": [15, 1, 15],
-      "faces": {
-        "north": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "south": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "east": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "west": {"texture": "#side", "uv": [0, 0, 20, 4]},
-        "up": {"texture": "#side", "uv": [0, 0, 20, 20]},
-        "down": {"texture": "#side", "uv": [0, 0, 20, 20]}
+        "north": {"uv": [0, 0, 32, 8], "texture": "#sides"},
+        "east": {"uv": [0, 8, 26, 16], "texture": "#sides"},
+        "south": {"uv": [0, 8, 32, 16], "texture": "#sides"},
+        "west": {"uv": [0, 8, 26, 16], "texture": "#sides"},
+        "up": {"uv": [0, 0, 32, 28], "rotation": 180, "texture": "#top"},
+        "down": {"uv": [0, 0, 32, 26], "texture": "#bottom"}
       }
     }
-  ],
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [75, 45, 0],
-      "translation": [0, 2.5, 0],
-      "scale": [0.65, 0.65, 0.65]
-    },
-    "thirdperson_lefthand": {
-      "rotation": [75, 45, 0],
-      "translation": [0, 2.5, 0],
-      "scale": [0.65, 0.65, 0.65]
-    },
-    "gui": {
-      "rotation": [30, 225, 0],
-      "scale": [0.8, 0.8, 0.8]
-    },
-    "fixed": {
-      "rotation": [0, 180, 0],
-      "scale": [0.75, 0.75, 0.75]
-    }
-  }
+  ]
 }

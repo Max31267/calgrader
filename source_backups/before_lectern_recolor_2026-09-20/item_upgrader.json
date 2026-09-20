@@ -1,0 +1,135 @@
+{
+  "credit": "Создано в Blockbench",
+  "textures": {
+    "front": "calgrader:block/item_upgrader_front",
+    "side": "calgrader:block/item_upgrader_side",
+    "top": "calgrader:block/item_upgrader_top",
+    "particle": "calgrader:block/item_upgrader_side"
+  },
+  "elements": [
+    {
+      "name": "Основной корпус",
+      "from": [0.5, 0, 0.5],
+      "to": [15.5, 15, 15.5],
+      "faces": {
+        "north": {"texture": "#front", "uv": [0, 0, 32, 32]},
+        "south": {"texture": "#side", "uv": [0, 0, 32, 32]},
+        "east": {"texture": "#side", "uv": [0, 0, 32, 32]},
+        "west": {"texture": "#side", "uv": [0, 0, 32, 32]},
+        "up": {"texture": "#top", "uv": [0, 0, 32, 32]},
+        "down": {"texture": "#side", "uv": [0, 0, 32, 32]}
+      }
+    },
+    {
+      "name": "Верхний кожух",
+      "from": [0, 15, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"texture": "#side", "uv": [0, 0, 32, 4]},
+        "south": {"texture": "#side", "uv": [0, 0, 32, 4]},
+        "east": {"texture": "#side", "uv": [0, 0, 4, 32]},
+        "west": {"texture": "#side", "uv": [0, 0, 4, 32]},
+        "up": {"texture": "#top", "uv": [0, 0, 32, 32]},
+        "down": {"texture": "#side", "uv": [0, 0, 32, 32]}
+      }
+    },
+    {
+      "name": "Передняя панель",
+      "from": [1.5, 2, -0.25],
+      "to": [14.5, 14, 0.25],
+      "faces": {
+        "north": {"texture": "#front", "uv": [0, 0, 32, 32]},
+        "south": {"texture": "#side", "uv": [0, 0, 32, 4]},
+        "east": {"texture": "#side", "uv": [0, 0, 4, 24]},
+        "west": {"texture": "#side", "uv": [0, 0, 4, 24]},
+        "up": {"texture": "#side", "uv": [0, 0, 32, 4]},
+        "down": {"texture": "#side", "uv": [0, 0, 32, 4]}
+      }
+    },
+    {
+      "name": "Центральный экран",
+      "from": [4, 4, -0.5],
+      "to": [12, 12, -0.25],
+      "faces": {
+        "north": {"texture": "#front", "uv": [4, 4, 28, 28]},
+        "south": {"texture": "#side", "uv": [0, 0, 32, 2]},
+        "east": {"texture": "#side", "uv": [0, 0, 2, 16]},
+        "west": {"texture": "#side", "uv": [0, 0, 2, 16]},
+        "up": {"texture": "#side", "uv": [0, 0, 16, 2]},
+        "down": {"texture": "#side", "uv": [0, 0, 16, 2]}
+      }
+    },
+    {
+      "name": "Левая передняя стойка",
+      "from": [1, 1, -0.4],
+      "to": [3, 15, 0.2],
+      "faces": {
+        "north": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "south": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "east": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "west": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "up": {"texture": "#side", "uv": [0, 0, 8, 8]},
+        "down": {"texture": "#side", "uv": [0, 0, 8, 8]}
+      }
+    },
+    {
+      "name": "Правая передняя стойка",
+      "from": [13, 1, -0.4],
+      "to": [15, 15, 0.2],
+      "faces": {
+        "north": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "south": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "east": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "west": {"texture": "#side", "uv": [0, 0, 8, 32]},
+        "up": {"texture": "#side", "uv": [0, 0, 8, 8]},
+        "down": {"texture": "#side", "uv": [0, 0, 8, 8]}
+      }
+    },
+    {
+      "name": "Нижняя опора слева",
+      "from": [1, 0, 1],
+      "to": [6, 1, 6],
+      "faces": {
+        "north": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "south": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "east": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "west": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "up": {"texture": "#side", "uv": [0, 0, 20, 20]},
+        "down": {"texture": "#side", "uv": [0, 0, 20, 20]}
+      }
+    },
+    {
+      "name": "Нижняя опора справа",
+      "from": [10, 0, 10],
+      "to": [15, 1, 15],
+      "faces": {
+        "north": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "south": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "east": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "west": {"texture": "#side", "uv": [0, 0, 20, 4]},
+        "up": {"texture": "#side", "uv": [0, 0, 20, 20]},
+        "down": {"texture": "#side", "uv": [0, 0, 20, 20]}
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.65, 0.65, 0.65]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.65, 0.65, 0.65]
+    },
+    "gui": {
+      "rotation": [30, 225, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "fixed": {
+      "rotation": [0, 180, 0],
+      "scale": [0.75, 0.75, 0.75]
+    }
+  }
+}
