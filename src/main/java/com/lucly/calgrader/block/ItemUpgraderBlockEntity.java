@@ -1,6 +1,6 @@
 package com.lucly.calgrader.block;
 
-import com.lucly.calgrader.calgrader;
+import com.lucly.calgrader.Calgrader;
 import com.lucly.calgrader.menu.UpgraderMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -26,7 +26,7 @@ public class ItemUpgraderBlockEntity extends BlockEntity implements Container, M
     private final NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
 
     public ItemUpgraderBlockEntity(BlockPos pos, BlockState blockState) {
-        super(calgrader.ITEM_UPGRADER_BLOCK_ENTITY.get(), pos, blockState);
+        super(Calgrader.ITEM_UPGRADER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.lucly.calgrader.menu;
 
 import com.lucly.calgrader.block.ItemUpgraderBlockEntity;
-import com.lucly.calgrader.calgrader;
+import com.lucly.calgrader.Calgrader;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Container;
@@ -47,7 +47,7 @@ public class UpgraderMenu extends AbstractContainerMenu {
     }
 
     private UpgraderMenu(int containerId, Inventory playerInventory, Container upgrader, ContainerData data) {
-        super(calgrader.UPGRADER_MENU.get(), containerId);
+        super(Calgrader.UPGRADER_MENU.get(), containerId);
         checkContainerSize(upgrader, 2);
         checkContainerDataCount(data, 6);
         this.upgrader = upgrader;
@@ -56,7 +56,7 @@ public class UpgraderMenu extends AbstractContainerMenu {
         this.addSlot(new Slot(upgrader, ItemUpgraderBlockEntity.TARGET_SLOT, 47, 62) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return !stack.is(calgrader.ITEM_UPGRADER_ITEM.get());
+                return !stack.is(Calgrader.ITEM_UPGRADER_ITEM.get());
             }
         });
 
@@ -86,6 +86,9 @@ public class UpgraderMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int id) {
+        if (!stillValid(player) || player.level().isClientSide()) {
+            return false;
+        }
         if (id == BUTTON_UPGRADE) {
             startUpgrade(player, player.getRandom());
             return true;
@@ -106,7 +109,7 @@ public class UpgraderMenu extends AbstractContainerMenu {
         }
 
         if (id >= BUTTON_SELECT_ITEM_BASE && id < BUTTON_AMOUNT_BASE) {
-            Item item = BuiltInRegistries.ITEM.byId(id - BUTTON_SELECT_ITEM_BASE);
+            Item item = selectableReward(id);
             if (item != Items.AIR) {
                 data.set(DATA_SELECTED_ITEM, BuiltInRegistries.ITEM.getId(item));
                 return true;
@@ -116,9 +119,17 @@ public class UpgraderMenu extends AbstractContainerMenu {
         return false;
     }
 
+    static Item selectableReward(int buttonId) {
+        if (buttonId < BUTTON_SELECT_ITEM_BASE || buttonId >= BUTTON_AMOUNT_BASE) {
+            return Items.AIR;
+        }
+        Item item = BuiltInRegistries.ITEM.byId(buttonId - BUTTON_SELECT_ITEM_BASE);
+        return RewardPolicy.isAllowed(item) ? item : Items.AIR;
+    }
+
     public Item getSelectedItem() {
         Item item = BuiltInRegistries.ITEM.byId(data.get(DATA_SELECTED_ITEM));
-        return item == Items.AIR ? Items.DIAMOND : item;
+        return RewardPolicy.isAllowed(item) ? item : Items.AIR;
     }
 
     public ItemStack getSelectedItemStack() {
@@ -143,7 +154,7 @@ public class UpgraderMenu extends AbstractContainerMenu {
 
     public int getOfferValue() {
         ItemStack offer = upgrader.getItem(ItemUpgraderBlockEntity.TARGET_SLOT);
-        return offer.isEmpty() || offer.is(calgrader.ITEM_UPGRADER_ITEM.get())
+        return offer.isEmpty() || offer.is(Calgrader.ITEM_UPGRADER_ITEM.get())
                 ? 0
                 : getItemValue(offer.getItem()) * offer.getCount();
     }
@@ -163,8 +174,7 @@ public class UpgraderMenu extends AbstractContainerMenu {
             return 0;
         }
 
-        long chance = (long) getOfferValue() * 10_000L / rewardValue;
-        return (int) Math.clamp(chance, 0L, 9_500L);
+        return UpgradeRules.chanceBasisPoints(getOfferValue(), rewardValue);
     }
 
     public int getDisplayedChanceBasisPoints() {
@@ -175,7 +185,9 @@ public class UpgraderMenu extends AbstractContainerMenu {
     }
 
     public void setLocalSelectedItem(Item item) {
-        data.set(DATA_SELECTED_ITEM, BuiltInRegistries.ITEM.getId(item));
+        if (RewardPolicy.isAllowed(item)) {
+            data.set(DATA_SELECTED_ITEM, BuiltInRegistries.ITEM.getId(item));
+        }
     }
 
     public void setLocalAmount(int amount) {
@@ -189,7 +201,8 @@ public class UpgraderMenu extends AbstractContainerMenu {
 
         ItemStack offer = upgrader.getItem(ItemUpgraderBlockEntity.TARGET_SLOT);
         int chance = getSuccessChanceBasisPoints();
-        if (offer.isEmpty() || offer.is(calgrader.ITEM_UPGRADER_ITEM.get()) || chance <= 0) {
+        if (offer.isEmpty() || offer.is(Calgrader.ITEM_UPGRADER_ITEM.get())
+                || !RewardPolicy.isAllowed(getSelectedItem()) || chance <= 0) {
             return;
         }
 
@@ -240,11 +253,8 @@ public class UpgraderMenu extends AbstractContainerMenu {
         }
 
         BlockPos pos = blockEntity.getBlockPos();
-        int remaining = amount;
-        int maxStackSize = item.getDefaultMaxStackSize();
-        while (remaining > 0) {
-            ItemStack reward = new ItemStack(item, Math.min(remaining, maxStackSize));
-            remaining -= reward.getCount();
+        for (int count : UpgradeRules.rewardStackCounts(amount, item.getDefaultMaxStackSize())) {
+            ItemStack reward = new ItemStack(item, count);
             Containers.dropItemStack(level, pos.getX() + 0.5D, pos.getY() + 1.05D, pos.getZ() + 0.5D, reward);
         }
     }

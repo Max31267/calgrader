@@ -24,8 +24,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
-@Mod(calgrader.MODID)
-public class calgrader {
+@Mod(Calgrader.MODID)
+public class Calgrader {
     public static final String MODID = "calgrader";
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -59,7 +59,7 @@ public class calgrader {
             .displayItems((parameters, output) -> output.accept(ITEM_UPGRADER_ITEM.get()))
             .build());
 
-    public calgrader(IEventBus modEventBus, ModContainer modContainer) {
+    public Calgrader(IEventBus modEventBus, ModContainer modContainer) {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);

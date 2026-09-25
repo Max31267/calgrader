@@ -1,13 +1,12 @@
 package com.lucly.calgrader.client;
 
 import com.mojang.math.Axis;
-import com.lucly.calgrader.calgrader;
 import com.lucly.calgrader.menu.UpgraderMenu;
+import com.lucly.calgrader.menu.RewardPolicy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -20,7 +19,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 public class UpgraderScreen extends AbstractContainerScreen<UpgraderMenu> {
     private static final int SELECTOR_X = 8;
@@ -33,14 +31,6 @@ public class UpgraderScreen extends AbstractContainerScreen<UpgraderMenu> {
     private static final int SELECTOR_ROWS = 7;
     private static final int SPIN_DURATION_TICKS = 80;
     private static final double FULL_TURN = Math.PI * 2.0D;
-    private static final Set<String> NON_SURVIVAL_ITEMS = Set.of(
-            "air", "barrier", "bedrock", "budding_amethyst", "chain_command_block",
-            "chorus_plant", "command_block", "command_block_minecart", "debug_stick", "end_portal_frame",
-            "frogspawn", "jigsaw", "knowledge_book", "light", "petrified_oak_slab", "player_head",
-            "reinforced_deepslate",
-            "repeating_command_block", "spawner", "structure_block", "structure_void",
-            "suspicious_gravel", "suspicious_sand", "test_block", "test_instance_block",
-            "trial_spawner", "vault");
     private static final int PANEL = 0xFFC6C6C6;
     private static final int PANEL_DARK = 0xFF555555;
     private static final int SLOT = 0xFF373737;
@@ -77,7 +67,7 @@ public class UpgraderScreen extends AbstractContainerScreen<UpgraderMenu> {
         super.init();
         allItemChoices.clear();
         BuiltInRegistries.ITEM.stream()
-                .filter(UpgraderScreen::isAvailableInSurvival)
+                .filter(RewardPolicy::isAllowed)
                 .sorted(Comparator.comparing(item -> item.getDescription().getString()))
                 .forEach(allItemChoices::add);
         applySearch("");
@@ -120,15 +110,6 @@ public class UpgraderScreen extends AbstractContainerScreen<UpgraderMenu> {
             searchBox.setFocused(open);
             this.setFocused(open ? searchBox : null);
         }
-    }
-
-    private static boolean isAvailableInSurvival(Item item) {
-        String itemId = BuiltInRegistries.ITEM.getKey(item).getPath();
-        return item != Items.AIR
-                && item != calgrader.ITEM_UPGRADER_ITEM.get()
-                && !NON_SURVIVAL_ITEMS.contains(itemId)
-                && !itemId.startsWith("infested_")
-                && !itemId.endsWith("_spawn_egg");
     }
 
     private void sendButton(int buttonId) {

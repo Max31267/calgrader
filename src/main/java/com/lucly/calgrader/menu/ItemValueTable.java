@@ -1,6 +1,7 @@
 package com.lucly.calgrader.menu;
 
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -9,8 +10,14 @@ final class ItemValueTable {
     }
 
     static int get(Item item) {
-        ItemStack stack = item.getDefaultInstance();
-        String path = BuiltInRegistries.ITEM.getKey(item).getPath();
+        return get(BuiltInRegistries.ITEM.getKey(item), item.getDefaultInstance());
+    }
+
+    static int get(ResourceLocation id, ItemStack stack) {
+        if (!id.getNamespace().equals("minecraft")) {
+            return 0;
+        }
+        String path = id.getPath();
 
         int explicitValue = explicitValue(path);
         if (explicitValue > 0) {
@@ -169,7 +176,6 @@ final class ItemValueTable {
             case "ender_chest" -> 300;
             case "respawn_anchor" -> 500;
             case "end_crystal" -> 300;
-            case "item_upgrader" -> 850;
 
             // Transport and frequently crafted equipment.
             case "minecart" -> 100;
